@@ -19,7 +19,7 @@ const routes = [
   {
     path: '/hello',
     name: 'hello',
-    component: HelloView
+    component: HelloView //component 옵션과 import 문에서 가져온 컴포넌트 이름이 동일해야함
   }
 ]
 

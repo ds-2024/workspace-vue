@@ -7,6 +7,10 @@
         <li>{{menus[1]}}</li>
         <li>{{menus[2]}}</li>
     </ul>
+    <ul>
+        <li v-bind:key="i" v-for="(menu, i) in menus">{{menu}}</li>
+        
+    </ul>
 
     <table border="1">
         <thead>
@@ -39,7 +43,7 @@
 export default
  
 {
-    name: "Ex02View",
+    name: "Ex02View", //파일이름과 반드시 같을 필요는 없음. 자바 부분이라 주석 표시도 //
     components: {},
     data () {
         return {
@@ -56,7 +60,7 @@ export default
             imgUrl: "https://mml.pstatic.net/www/mobile/edit/20240318_1095/upload_1710771613913KFcqp.gif" 
         };
     },
-    methods: {},
+    methods: {}, //현재 예제에서는 메서드가 정의되어 있지 않으므로 빈 객체로 남아있는것임.
 };
 </script>
 
