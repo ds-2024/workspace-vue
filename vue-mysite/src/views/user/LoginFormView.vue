@@ -2,24 +2,7 @@
     <div>
         <div id="wrap">
 
-            <div id="header" class="clearfix">
-                <h1>
-                    <a href="">MySite</a>
-                </h1>
-
-                <!-- 
-    <ul>
-        <li>황일영 님 안녕하세요^^</li>
-        <li><a href="" class="btn_s">로그아웃</a></li>
-        <li><a href="" class="btn_s">회원정보수정</a></li>
-    </ul>
-    -->
-                <ul>
-                    <li><a href="" class="btn_s">로그인</a></li>
-                    <li><a href="" class="btn_s">회원가입</a></li>
-                </ul>
-
-            </div>
+            <AppHeader />
             <!-- //header -->
 
             <div id="nav">
@@ -93,9 +76,7 @@
             </div>
             <!-- //container  -->
 
-            <div id="footer">
-                Copyright ⓒ 2020 황일영. All right reserved
-            </div>
+            <AppFooter />
             <!-- //footer -->
 
         </div>
@@ -108,9 +89,14 @@
 <script>
 import axios from 'axios';
 import "@/assets/css/user.css"
+import AppFooter from '@/components/AppFooter.vue';
+import AppHeader from '@/components/AppHeader.vue';
 export default {
     name: "LoginFormView",
-    components: {},
+    components: {
+        AppFooter,
+        AppHeader
+    },
     data() {
         return {
             userVo: {
@@ -134,8 +120,10 @@ export default {
                 console.log(response);//수신데이타
                 console.log(response.data); //수신데이타 authUSer
                 
+                if(response.data.result == "success"){    
+
                 //로그인 사용자 정보
-                let authUser =  response.data;
+                let authUser =  response.data.apiData;
                 
                
                 //토큰 응답문서의 헤더에 있음 
@@ -150,6 +138,11 @@ export default {
                 console.log(token);
 
                 this.$router.push({ path:'/' });
+
+            }else{
+                console.log(response.data.message);
+                alert("아이디 패스워드를 확인하세요")
+            }    
 
             }).catch(error => {
                 console.log(error);

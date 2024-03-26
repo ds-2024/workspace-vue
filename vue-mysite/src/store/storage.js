@@ -8,12 +8,16 @@ export default createStore({
             token: null 
         };
     },
-    mutations: {
+    mutations: { //메소드 쓰는 자리
         setAuthUser(state, payload){
             state.authUser = payload;
         },
         setToken(state, payload){
             state.token = payload;
+        },
+        setAuthName(state, payload){
+            state.authUser.name = payload;
+
         }
     },
     plugins: [ /* 자동매칭시스템 */
