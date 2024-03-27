@@ -28,8 +28,8 @@
                     <td> {{ phonebookVo.hp }}</td>
                     <td> {{ phonebookVo.company }}</td>
                     <td>
-                        <button type=" button">삭제하기</button>
-                        <a href="">[수정폼이동]</a>
+                        <button type=" button">삭제하기</button> <!-- 폼에 터지게 하기 vs 버튼에 터지게 하기 -->
+                        <router-link v-bind:to="`/modify/${phonebookVo.personId}`">[수정폼이동]</router-link>
                     </td>
                 </tr>
             </tbody>
@@ -37,7 +37,7 @@
 
         <br>
 
-        <a href="">등록폼 이동</a>
+        <router-link to="/write">등록폼 이동</router-link>
 
     </div>
 </template>
