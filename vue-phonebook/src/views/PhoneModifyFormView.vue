@@ -25,7 +25,7 @@
 		<input type="text" name="company" v-model="personVo.company">
 	</div>
 	
-	<input type="text" name="personId" value=""><br>
+	<input type="text" name="personId" v-model="personVo.personId"><br>
 	<button type="submit">수정</button>
 	
 </form>
@@ -55,6 +55,30 @@ export default {
 		};
     },
     methods: {
+		modifyform(){
+			console.log("수정폼");
+            console.log(this.personVo);
+            //서버로 전송
+            axios({
+                method: 'put', // put, post, delete  //불러오는것은 GET //저장은 POST
+                url: 'http://localhost:9000/api/persons/modify'+ this.phonebookVo.personId //''따옴표 문법도 중요
+                headers: { 
+                    "Content-Type": "application/json; charset=utf-8"
+                }, 
+                //params: guestbookVo, //get방식 파라미터로 값이 전달 @ModelAttribute
+                data: this.personVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달 @RequestBody
+
+                responseType: 'json' //수신타입
+            }).then(response => { 
+                console.log(response); //수신데이타
+                    //메인으로 이동
+                    this.$router.push({ path:'/' });
+                   
+			}).catch(error => { 
+                console.log(error);
+			});
+
+		}
 		modifyUser(){   
             console.log("클릭");
             console.log(this.personVo);
@@ -64,7 +88,7 @@ export default {
                 url: 'http://localhost:9000/api/persons/modify', //''따옴표 문법도 중요
                 headers: { 
                     "Content-Type": "application/json; charset=utf-8"
-                }, //토큰 매번 보내라
+                }, 
                 //params: guestbookVo, //get방식 파라미터로 값이 전달 @ModelAttribute
                 data: this.personVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달 @RequestBody
 
