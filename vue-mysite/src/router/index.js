@@ -4,6 +4,12 @@ import LoginFormView from '@/views/user/LoginFormView.vue'
 import ModifyFormView from '@/views/user/ModifyFormView.vue'
 import AttachFormView from '@/views/attach/AttachFormView.vue'
 import AttachResultView from '@/views/attach/AttachResultView.vue'
+import BoardListView from '@/views/board/BoardListView.vue'
+import BoardModifyFormView from '@/views/board/BoardModifyFormView.vue'
+import BoardReadView from '@/views/board/BoardReadView.vue'
+import BoardWriteFormView from '@/views/board/BoardWriteFormView.vue'
+
+
 
 const routes = [
   {
@@ -31,6 +37,27 @@ const routes = [
     name: 'AttachResultView',
     component: AttachResultView
   },
+  {
+    path: '/board/list',
+    name: 'BoardListView', /* 이름같으면 페이지 안뜬다 */
+    component: BoardListView
+  },
+  {
+    path: '/board/modifyform',
+    name: 'BoardModifyFormView', /* 이름같으면 페이지 안뜬다 */
+    component: BoardModifyFormView
+  },
+  {
+    path: '/board/read',
+    name: 'BoardReadView', /* 이름같으면 페이지 안뜬다 */
+    component: BoardReadView
+  },
+  {
+    path: '/board/writeform',
+    name: 'BoardWriteForm', /* 이름같으면 페이지 안뜬다 */
+    component: BoardWriteForm
+  },
+
   
 ]
 
