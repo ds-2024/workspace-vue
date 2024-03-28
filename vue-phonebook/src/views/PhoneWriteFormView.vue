@@ -65,6 +65,8 @@ export default {
                 console.log(response.data); //수신데이타
                 //this.guestbookList.unshift(response.data); //기존데이터 위에 가져온 데이터 1개 올려놓기.엄청난 코드임.
 
+                this.$router.push({ path: '/' })
+
             }).catch(error => { 
                 console.log(error);
             });                    

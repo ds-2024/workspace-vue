@@ -46,8 +46,8 @@ export default {
     components: {},
     data() {
         return {
-			personId: "",
 			personVo:{
+                personId: this.$route.params.personId,
 				name: "",
 				hp: "",
 				company: ""
@@ -60,8 +60,8 @@ export default {
             console.log(this.personVo);
             //서버로 전송
             axios({
-                method: 'put', // put, post, delete  //불러오는것은 GET //저장은 POST
-                url: 'http://localhost:9000/api/persons/modify'+ this.phonebookVo.personId //''따옴표 문법도 중요
+                method: 'get', // put, post, delete  //불러오는것은 GET //저장은 POST
+                url: 'http://localhost:9000/api/persons/modify/'+ this.personVo.personId, //''따옴표 문법도 중요
                 headers: { 
                     "Content-Type": "application/json; charset=utf-8"
                 }, 
@@ -72,20 +72,20 @@ export default {
             }).then(response => { 
                 console.log(response); //수신데이타
                     //메인으로 이동
-                    this.$router.push({ path:'/' });
+                    this.personVo = response.data;
                    
 			}).catch(error => { 
                 console.log(error);
 			});
 
-		}
+		},
 		modifyUser(){   
             console.log("클릭");
             console.log(this.personVo);
             //서버로 전송
             axios({
                 method: 'put', // put, post, delete  //불러오는것은 GET //저장은 POST
-                url: 'http://localhost:9000/api/persons/modify', //''따옴표 문법도 중요
+                url: 'http://localhost:9000/api/persons/modify/' + this.personVo.personId, //''따옴표 문법도 중요
                 headers: { 
                     "Content-Type": "application/json; charset=utf-8"
                 }, 
@@ -96,7 +96,11 @@ export default {
             }).then(response => { 
                 console.log(response); //수신데이타
                     //메인으로 이동
-                    this.$router.push({ path:'/' });
+                   // this.$router.push({ path:'/' });
+                  
+                   
+                    this.$router.push({ path: '/' })
+                
                    
 			}).catch(error => { 
                 console.log(error);
@@ -105,7 +109,7 @@ export default {
 	
 	},
     created(){
-		
+		this.modifyform();
 	}
 };
 </script>

@@ -16,7 +16,7 @@ const routes = [
     component: PhoneWriteFormView
   },
   {
-    path: '/modify/:no',
+    path: '/modify/:personId',
     name: 'PhoneModifyFormView',
     component: PhoneModifyFormView
   },

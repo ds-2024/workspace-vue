@@ -28,7 +28,7 @@
                     <td> {{ phonebookVo.hp }}</td>
                     <td> {{ phonebookVo.company }}</td>
                     <td>
-                        <button type=" button">삭제하기</button> <!-- 폼에 터지게 하기 vs 버튼에 터지게 하기 -->
+                        <button type="submit" v-on:click="removeList(phonebookVo.personId)">삭제하기</button>
                         <router-link v-bind:to="`/modify/${phonebookVo.personId}`">[수정폼이동]</router-link>
                     </td>
                 </tr>
@@ -52,6 +52,7 @@ export default {
         return {
             phonebookList: [],
             phonebookVo: {
+                personId: "",
                 name: "",
                 hp: "",
                 company: ""
@@ -77,6 +78,33 @@ export default {
             }).catch(error => {
                 console.log(error);
             });
+        },
+        removeList(personId) {
+            console.log("삭제하기");
+            axios({
+				method: 'delete', // put, post, delete 
+				url: 'http://localhost:9000/api/persons/' + personId,
+				headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
+				//params: guestbookVo, //get방식 파라미터로 값이 전달
+				data: {personId}, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+
+				responseType: 'json' //수신타입
+			}).then(response => {
+                console.log("--------------"); //수신데이타
+				console.log(response.data); //수신데이타
+                console.log("--------------"); //수신데이타
+                if(response.data.count>0){
+                    this.getList();
+                }else{
+                    alert("다시삭제요청")
+                }
+				
+
+			}).catch(error => {
+				console.log(error);
+			});
+
+
         }
     },
     created() {
