@@ -1,52 +1,107 @@
 <template>
-    
- <div class="member-profile">
+
+  <div class="member-profile">
     <h2>회원 정보</h2>
+    <form v-on:submit.prevent="modifyMember" action="" method=""></form>
     <div class="member-details">
-      <p><strong>이름:</strong> {{ member.name }}</p>
-      <p><strong>등록일:</strong> {{ member.register_Date }}</p>
-      <p><strong>잔여일:</strong> {{ member.remain_Date }}</p>
-      <p><strong>PT 횟수:</strong> {{ member.ptCount }}</p>
+      <p><strong>이름:</strong> {{ memberVo.name }}</p>
+      <p><strong>성별:</strong> {{ memberVo.gender }}</p>
+      <p><strong>HP:</strong> {{ memberVo.hp }}</p>
+      <p><strong>등록일:</strong> {{ memberVo.registerDate }}</p>
+      <p><strong>잔여일:</strong> {{ memberVo.remainDate }}</p>
+      <p><strong>PT 횟수:</strong> {{ memberVo.ptCount }}</p>
+      <button type="submit">회원정보수정</button>
+
     </div>
-    <button @click="showTrainers" class="pt-button">PT 등록</button>
-    <div v-if="showTrainersList" class="trainers-list">
+
+    <router-link to="/" class="pt-button">PT 등록</router-link>
+    <!--div v-if="showTrainersList" class="trainers-list" -->
+    <!--
       <h3>강사 리스트</h3>
       <ul>
         <li v-for="trainer in trainers" :key="trainer.id">{{ trainer.name }}</li>
       </ul>
-    </div> 
+      -->
   </div>
-   
+
+
 </template>
 
 
 <script>
+import axios from 'axios';
 export default {
-    name: "AfterLoginFormView",
-    components: {},
-    data() {
-        return {
-            member: {
-        name: '사용자 이름',
-        register_Date: '등록일',
-        remain_Date: '잔여일',
-        ptCount: 'PT 횟수'
-      },
-      showTrainersList: false,
-      trainers: [
-        { id: 1, name: '강사 1' },
-        { id: 2, name: '강사 2' },
-        { id: 3, name: '강사 3' }
-      ]
+  name: "AfterLoginFormView",
+  components: {},
+  data() {
+    return {
+      memberVo: {
+        name: "",
+        gender: "",
+        hp: "",
+        registerDate: "",
+        remainDate: "",
+        ptCount: ""
+      }
     };
+  },
+
+  methods: {
+    getAuthMember() {
+      axios({
+        method: 'get', // put, post, delete 
+        url: 'http://localhost:9000/api/member/login',
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Authorization": "Bearer " + this.$store.state.token
+        }, //전송타입 + 토큰
+
+        responseType: 'json' //수신타입
+      }).then(response => {
+
+        //data.apiData 안에 싸져서 memberVo 받음
+
+        console.log(response.data.apiData);//수신데이타
+        this.memberVo = response.data.apiData;
+
+
+      }).catch(error => {
+        console.log(error);
+      });
     },
-    
-    methods: {
-        showTrainers() {
-      this.showTrainersList = !this.showTrainersList;
-        }
+    modifyMember() {
+      console.log("클릭");
+      console.log(this.memberVo);
+      //서버로 전송
+      axios({
+        method: 'put', // put, post, delete  //불러오는것은 GET //저장은 POST
+        url: 'http://localhost:9000/api/member/modify/' + this.memberVo.name, //''따옴표 문법도 중요
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+
+        data: this.memberVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달 @RequestBody
+
+        responseType: 'json' //수신타입
+      }).then(response => {
+        console.log(response); //수신데이타
+        //메인으로 이동
+        // this.$router.push({ path:'/' });
+
+
+        this.$router.push({ path: '/member/logininfo' }) //'따옴표 주의!'
+
+
+      }).catch(error => {
+        console.log(error);
+      });
+
+
     },
-    created(){}
+    created() {
+      this.getAuthMember();
+    }
+  }  
 };
 </script>
 
@@ -88,25 +143,5 @@ h2 {
 
 .pt-button:hover {
   background-color: hsla(213, 100%, 37%, 0.748);
-}
-
-.trainers-list {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.trainers-list h3 {
-  margin-top: 0;
-}
-
-.trainers-list ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.trainers-list ul li {
-  margin-bottom: 5px;
 }
 </style>
