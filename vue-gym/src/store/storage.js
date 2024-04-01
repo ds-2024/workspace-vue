@@ -17,7 +17,8 @@ export default createStore({
         },
         setToken(state, payload) {
             state.token = payload;
-        }
+        },
+        
     },
     plugins: [
         createPersistedState({
