@@ -15,7 +15,6 @@
                     <button class="dvcheck" v-on:click="idCheck" type="button">중복체크</button><br>
                 </div>
 
-                <p class="duid">중복된 아이디 입니다.</p>
                 <p class="duid" v-if="isDuplicated">이미 사용중인 아이디입니다.</p>
                 <p class="duid" v-else-if="isNotDuplicated">사용 가능한 아이디입니다.</p>
                 <p class="duid" v-else>아이디를 입력해주세요</p>
@@ -57,13 +56,14 @@
         </div>
     </div>
 </template>
+
 <script>
 
 import axios from 'axios';
 import "@/assets/css/joinform.css"
 
 export default {
-    name: "MemberJoin",
+    name: "MemberJoinFormView",
     components: {},
     data() {
         return {
@@ -84,14 +84,13 @@ export default {
     methods: {
         idCheck() {
             //let id = this.memberVo.id;
-            console.log(this.memberVo);
             if (this.memberVo.id == "") {
                 alert("아이디를 입력해주세요")
             } else {
                 console.log(this.memberVo);
                 axios({
-                    method: 'put', // put, post, delete
-                    url: 'http://localhost:9000/api/member/join',
+                    method: 'post', // put, post, delete
+                    url: 'http://localhost:9000/api/member/idcheck',
                     headers: { "Content-Type": "application/json; charset=utf-8" }, //전송타입
                     //params: userVo, //get방식 파라미터로 값이 전달
                     data: this.memberVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -130,7 +129,7 @@ export default {
                     console.log(response.data); //수신데이타
 
                     if (response.data == 1) {
-                        this.$router.push("/member/login");
+                        this.$router.push("/member/logininfo");
                     } else {
                         alert("회원가입에 실패하였습니다");
                     }
