@@ -9,33 +9,45 @@
 
         <div>
             <form v-on:submit.prevent="join" action="">
-                <div id="id-All">
+                <div id="id-all">
                     <label class="id" for="">ID</label>
                     <input class="idbox" type="text" v-model="memberVo.id">
                     <button class="dvcheck" v-on:click="idCheck" type="button">중복체크</button><br>
                 </div>
-                <p id="duid">중복된 아이디 입니다.</p>
-                <p v-if="isDuplicated">이미 사용중인 아이디입니다.</p>
-                <p v-else-if="isNotDuplicated">사용 가능한 아이디입니다.</p>
-                <p v-else>아이디를 입력해주세요</p>
 
-                <label class="pw" for="">PW</label>
-                <input class="pwbox" type="text" v-model="memberVo.password"><br>
+                <p class="duid">중복된 아이디 입니다.</p>
+                <p class="duid" v-if="isDuplicated">이미 사용중인 아이디입니다.</p>
+                <p class="duid" v-else-if="isNotDuplicated">사용 가능한 아이디입니다.</p>
+                <p class="duid" v-else>아이디를 입력해주세요</p>
 
-                <label class="name" for="">성명</label>
-                <input class="namebox" type="text" v-model="memberVo.name"><br>
+                <div id="pw-all">
+                    <label class="pw" for="">PW</label>
+                    <input class="pwbox" type="text" v-model="memberVo.password"><br>
+                </div>
 
-                <label class="age" for="">나이</label>
-                <input class="agebox" type="text" v-model="memberVo.age"><br>
+                <div id="name-all">
+                    <label class="name" for="">성명</label>
+                    <input class="namebox" type="text" v-model="memberVo.name"><br>
+                </div>
 
-                <label class="address" for="">주소</label>
-                <input class="addressbox" type="text" v-model="memberVo.address"><br>
+                <div id="age-all">
+                    <label class="age" for="">나이</label>
+                    <input class="agebox" type="text" v-model="memberVo.age"><br>
+                </div>
 
-                <label class="hp" for="">HP</label>
-                <input class="hpbox" type="text" placeholder="" v-model="memberVo.hp"><br>
+                <div id="address-all">
+                    <label class="address" for="">주소</label>
+                    <textarea class="addressbox" v-model="memberVo.address"></textarea>
+                </div>
 
-                <label class="gender" for="">성별</label>
-                <input class="genderbox" type="text" placeholder="" v-model="memberVo.gender"><br>
+                <div id="hp-all">
+                    <label class="hp" for="">HP</label>
+                    <input class="hpbox" type="text" placeholder="" v-model="memberVo.hp"><br>
+                </div>
+                <div id="gender-all">
+                    <label class="gender" for="">성별</label>
+                    <input class="genderbox" type="text" placeholder="" v-model="memberVo.gender"><br>
+                </div>
                 <br>
 
 
