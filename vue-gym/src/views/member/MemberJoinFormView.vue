@@ -21,7 +21,7 @@
 
                 <div id="pw-all">
                     <label class="pw" for="">PW</label>
-                    <input class="pwbox" type="text" v-model="memberVo.password"><br>
+                    <input class="pwbox" type="password" v-model="memberVo.password"><br>
                 </div>
 
                 <div id="name-all">
@@ -129,9 +129,10 @@ export default {
                     console.log(response.data); //수신데이타
 
                     if (response.data == 1) {
-                        this.$router.push("/member/logininfo");
+                        alert("축하합니다. 회원가입에 성공하셨습니다.")
+                        this.$router.push("/member/login");
                     } else {
-                        alert("회원가입에 실패하였습니다");
+                        alert("회원가입에 실패하였습니다.");
                     }
 
 

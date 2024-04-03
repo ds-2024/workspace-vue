@@ -1,48 +1,60 @@
 <template>
-    <div class="member-profile">
-        <h2>회원 정보 수정</h2>
-        <form v-on:submit.prevent="modifyMember" method="put">
-            <div class="form-group">
-                <label for="name">이름</label>
-                <input type="text" id="name" v-model="memberVo.name">
-            </div>
-            <div class="form-group">
-                <label for="gender">성별</label>
-                <input type="text" id="gender" v-model="memberVo.gender">
-            </div>
-            <div class="form-group">
-                <label for="hp">HP</label>
-                <input type="text" id="hp" v-model="memberVo.hp">
-            </div>
-            <div class="form-group">
-                <label for="registerDate">등록일</label>
-                <input type="text" id="registerDate" v-model="memberVo.registerDate">
-            </div>
-            <div class="form-group">
-                <label for="remainDate">잔여일</label>
-                <input type="text" id="remainDate" v-model="memberVo.remainDate">
-            </div>
-            <div class="form-group">
-                <label for="ptCount">PT 횟수</label>
-                <input type="text" id="ptCount" v-model="memberVo.ptCount">
-            </div>
-            <button type="submit">저장</button>
-        </form>
+    <div class="memberModifyform">
+        <h2 class= "mbModifytxt" >회원 정보 수정</h2>
+            <form v-on:submit.prevent="modifyMember" method="put">
+                <div class="id-group">
+                    <label class="id" for="id">ID</label>
+                    <span id="id">{{ memberVo.id }}</span>
+                </div>
+
+                <div class="pw-group">
+                    <label class="pw" for="pw">PW</label>
+                    <input type="password" id="pwbox" v-model="memberVo.password">
+                </div>
+                <div class="name-group">
+                    <label class="name" for="name">성명</label>
+                    <input type="text" id="namebox" v-model="memberVo.name">
+                </div>
+                <div class="hp-group">
+                    <label class="hp" for="hp">HP</label>
+                    <input type="text" id="hpbox" v-model="memberVo.hp">
+                </div>
+                <div class="age-group">
+                    <label class="age" for="age">나이</label>
+                    <input type="text" id="agebox" v-model="memberVo.age">
+                </div>
+                <div class="address-group">
+                    <label class="address" for="address">주소</label>
+                    <textarea id="addressbox" v-model="memberVo.address"></textarea>
+                </div>
+                
+                <button id="saveBtn" type="submit">저장</button>
+            </form>
+            <!--//modifyform-->
+        
+        <GymFooter />
+        <!-- //footer -->
     </div>
 </template>
 
 <script>
+import "@/assets/css/modifyform.css"
+import GymFooter from '@/components/GymFooter.vue'; 
 import axios from 'axios';
 export default {
+    name: "ModifyMemberFormView",
+    components: {
+        GymFooter
+    },
     data() {
         return {
             memberVo: {
+                id:'',
+                password: '',
                 name: '',
-                gender: '',
                 hp: '',
-                registerDate: '',
-                remainDate: '',
-                ptCount: ''
+                age: '',
+                address: ''
             }
         };
     },
@@ -100,7 +112,7 @@ export default {
                 this.$store.commit("setAuthName", name);
 
                 //메인페이지로 이동
-                this.$router.push("/member/logininfo");
+                this.$router.push("/member/main");
                 } else {
                 console.log(response.data.message);
                 this.$store.commit("setAuthUser", null);
@@ -119,51 +131,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-.member-profile {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    font-weight: bold;
-}
-
-input[type="text"],
-select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-</style>
