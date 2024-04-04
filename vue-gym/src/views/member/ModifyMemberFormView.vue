@@ -1,5 +1,8 @@
 <template>
     <div class="memberModifyform">
+        <div id="join-heading">
+            WELCOME
+        </div>
         <h2 class= "mbModifytxt" >회원 정보 수정</h2>
             <form v-on:submit.prevent="modifyMember" method="put">
                 <div class="id-group">

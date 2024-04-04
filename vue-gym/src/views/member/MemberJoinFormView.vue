@@ -54,6 +54,8 @@
                 <button class="mjoin" type="submit">회원가입</button>
             </form>
         </div>
+        <GymFooter />
+        <!-- //footer -->
     </div>
 </template>
 
@@ -61,10 +63,12 @@
 
 import axios from 'axios';
 import "@/assets/css/joinform.css"
-
+import GymFooter from '@/components/GymFooter.vue';
 export default {
     name: "MemberJoinFormView",
-    components: {},
+    components: {
+        GymFooter
+    },
     data() {
         return {
             memberVo: {
@@ -130,7 +134,7 @@ export default {
 
                     if (response.data == 1) {
                         alert("축하합니다. 회원가입에 성공하셨습니다.")
-                        this.$router.push("/member/login");
+                        this.$router.push("/member/joinok");
                     } else {
                         alert("회원가입에 실패하였습니다.");
                     }

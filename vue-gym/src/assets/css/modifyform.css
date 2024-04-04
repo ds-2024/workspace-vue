@@ -16,6 +16,18 @@ form {
     text-align: center;
     margin: 0 auto;
 }
+#join-heading {
+    font-size: 150px;
+    font-style: italic;
+    font-family: "VITRO CORE TTF";
+    color: rgb(255, 0, 102);
+    line-height: 0.6;
+    text-align: center;
+    left: 179.187px;
+    top: 214.5px;
+    z-index: 28;
+    padding-top: 197px;
+}
 
 .mbModifytxt {
     font-size: 80px;
