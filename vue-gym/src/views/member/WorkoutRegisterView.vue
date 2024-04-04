@@ -1,0 +1,107 @@
+<template>
+    <div id="MbCommentList">
+        <div>
+            <h1 id="Mbtxt">MEMBER<br>LIST</h1>
+        </div>
+        <div>
+            <p id="CallMb"><strong id="Mb">{{memberVo.name}}</strong> 회원님</p>
+            <p id="Hp">핸드폰 번호: {{ memberVo.hp }}</p>
+        </div>
+        
+        <form v-on:submit.prevent="register" action="">
+
+            <div class="work-outCmt">
+                <p class="tab2">오늘의 운동코멘트</p>
+                <textarea class="todaycmt">오늘 컨디션 좋음. 하체 운동 완료</textarea>
+
+            </div>
+
+            <button class="register" v-on:click="register" type="submit">등록</button><br>
+            
+        </form>  
+        <div>
+            <table id="ptAll">
+                
+                    <tr id="ptInfo">
+                        <th class="tab2">받은PT횟수</th>
+                        <td class="tab3">{{ ptVo.pttotal }}</td>
+                        <th class="tab2">전체PT횟수</th>
+                        <td class="tab3">{{ptVo.ptcount}}</td>
+                    </tr>
+            </table>    
+            <table id="dateCmt" v-bind:key="i" v-for="(lessonVo, i) in lessonList">    
+                <tbody >
+                    <!-- <div v-bind:key="i" v-for="(lessonVo, i) in lessonList"> -->
+                        <tr>
+                            <td colspan="2" class="tab2">PT받은날짜</td>
+                            <td colspan="2" class="tab3">{{lessonVo.ldate}}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="2" class="tab2">COMMENT</td>
+                            <td colspan="2" class="tab3">{{lessonVo.comment}}</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <GymFooter />
+        <!-- //footer -->
+    
+    </div>
+</template>
+<script>
+import '@/assets/css/woRegister.css'
+import GymFooter from '@/components/GymFooter.vue';
+import axios from 'axios';
+export default {
+    name: 'WorkoutRegisterView',
+    components: {
+        GymFooter
+    },
+    data() {
+        return {
+            memberVo: {
+                name: "",
+                hp: "",
+            },
+            ptVo: {
+                pttotal: "",
+                ptcount: ""
+            },
+            lessonList: []
+            
+        };
+    },    
+    methods: {
+        getList(){
+            console.log("commentlist");
+            console.log(this.memberVo);
+            axios({
+            method: "get",
+            url: "http://localhost:9000/api/member/lessonlist",
+            headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            Authorization: "Bearer " + this.$store.state.token
+            },
+            responseType: "json"
+        }).then(response => {
+            console.log(response.data);
+           
+            this.memberVo = response.data.apiData.memberVo;
+            this.ptVo = response.data.apiData.ptInfoList[0];
+            //this.memberVo = response.data.apiData.memberlessonlist;
+            this.lessonList=response.data.apiData.mblessonList;
+           
+        }).catch(error => {
+            console.log(error);
+        });
+        }
+
+    },
+    created(){
+    this.getList();
+    }    
+    
+};
+</script>

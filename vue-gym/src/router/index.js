@@ -5,6 +5,7 @@ import ModifyMemberFormView from '../views/member/ModifyMemberFormView.vue'
 import MemberJoinFormView from '../views/member/MemberJoinFormView.vue'
 import JoinOkView from '../views/member/JoinOkView.vue'
 import MemberListView from '@/views/member/MemberListView.vue'
+import WorkoutRegisterView from '@/views/member/WorkoutRegisterView.vue'
 
 const routes = [
 
@@ -37,6 +38,11 @@ const routes = [
     path: '/member/ptlessonlist',
     name: '/member/ptlessonlist',
     component: MemberListView
+  },
+  {
+    path: '/trainer/ptlessonlist',
+    name: '/trainer/ptlessonlist',
+    component: WorkoutRegisterView
   },
 
 ]
