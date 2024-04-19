@@ -1,0 +1,57 @@
+
+
+.mbModifytxt {
+    color: #333;
+    margin-bottom: 50px;
+}
+
+.id-group,
+.form-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.id-group label,
+.form-field label {
+    width: 120px;
+}
+
+.id-group span,
+.form-field input,
+.form-field textarea {
+    width: 300px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-field button {
+    width: 10%;
+    padding: 5px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.form-field button:hover {
+    background-color: #e0e0e0;
+}
+
+form>button {
+    display: block;
+    width: 100px;
+    padding: 13px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #D3233A;
+    cursor: pointer;
+}
+
+form>button:hover {
+    background-color: #c00;
+}

@@ -1,0 +1,40 @@
+.success-container {
+    width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+.success-container #name {
+    color: #000000;
+    font-size: 55px;
+    font-weight: bold;
+}
+
+.success-container #welcome {
+    color: #D3233A;
+    font-size: 55px;
+    font-weight: bold;
+}
+.success-container #now {
+    color: #545454;
+    font-size: 30px;
+}
+
+.success-container #startBtn {
+    display: block;
+    width: 700px;
+    height: 100px;
+    padding: 10px;
+    margin: 0 auto;
+    color: #ffffff;
+    font-size: 40px;
+    text-decoration: none;
+    background-color: #D3233A;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    line-height: 100px;/* 버튼의 높이와 동일한 값으로 설정하여 텍스트를 수직으로 가운데로 정렬 */
+}
+
+.success-container #startBtn:hover {
+    background-color: #c00;
+}
