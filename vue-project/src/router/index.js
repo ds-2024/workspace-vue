@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import HelloView from '../views/HelloView.vue'
+import CarouselView from '../views/CarouselView.vue'
 
 const routes = [
   {
@@ -20,7 +21,12 @@ const routes = [
     path: '/hello',
     name: 'hello',
     component: HelloView //component 옵션과 import 문에서 가져온 컴포넌트 이름이 동일해야함
-  }
+  },
+  {
+    path: '/carou',
+    name: 'CarouselView',
+    component: CarouselView
+  },
 ]
 
 const router = createRouter({

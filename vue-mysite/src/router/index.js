@@ -55,7 +55,7 @@ const routes = [
   {
     path: '/board/writeform',
     name: 'BoardWriteForm', /* 이름같으면 페이지 안뜬다 */
-    component: BoardWriteForm
+    component: BoardWriteFormView
   },
 
   
